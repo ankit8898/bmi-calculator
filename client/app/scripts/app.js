@@ -11,19 +11,19 @@
 angular
   .module('bmiCalculatorApp', [
     'ngResource',
-    'ngRoute'
+    'ui.router'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise("/login");
+    $stateProvider
+      .state('login', {
+        url:        '/login',
+        templateUrl: 'views/session/login.html',
+        controller: 'SessionCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+      .state('bmi', {
+        url:        '/bmi',
+        templateUrl: 'views/bmis/index.html',
+        controller: 'BmiCtrl'
       })
-      .otherwise({
-        redirectTo: '/'
-      });
   });
