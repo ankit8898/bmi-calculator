@@ -13,7 +13,9 @@ angular
     'ui.router',
     'restangular'
   ])
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider,RestangularProvider,$httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = angular.element(document.querySelector('meta[name=csrf-token]')).attr('content')
+    RestangularProvider.setBaseUrl('http://localhost:3000');
     $urlRouterProvider.otherwise("/login");
     $stateProvider
       .state('login', {
