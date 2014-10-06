@@ -13,7 +13,7 @@ angular.module('bmiCalculatorApp')
   	var baseUrl = 'http://localhost:3000/bmis'
     // AngularJS will instantiate a singleton by calling "new" on this function
     this.foo = function(){
-    	var v = Restangular.all('bmis')
+    	var v = Restangular.all('api/v1/bmis')
     	v.getList().then(function(acc){
     		console.log(acc)
     	})

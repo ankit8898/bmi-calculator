@@ -7,14 +7,19 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
+var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
+
+
 module.exports = function (grunt) {
+
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
-
+  
+  grunt.loadNpmTasks('grunt-connect-proxy');
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
@@ -71,21 +76,39 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
-      livereload: {
-        options: {
-          open: true,
-          middleware: function (connect) {
-            return [
-              connect.static('.tmp'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
-              connect.static(appConfig.app)
-            ];
-          }
+      proxies: [
+        {
+          context: '/api/v1',
+          host: 'localhost',
+          port: 3000,
+          https: false,
+          changeOrigin: false,
+          xforward: false
         }
-      },
+      ],
+      livereload: {
+            options: {
+                open: true,
+                middleware: function (connect) {
+                  console.log('here')
+                    var middlewares = [];
+                    // Setup the proxy
+                    middlewares.push(proxySnippet);
+
+                    // Serve static files
+                    middlewares.push(
+                        connect.static('.tmp'),
+                        connect().use(
+                            '/bower_components',
+                            connect.static('./bower_components')
+                        ),
+                        connect.static(appConfig.app)
+                    );
+
+                    return middlewares;
+                }
+            }
+        },
       test: {
         options: {
           port: 9001,
@@ -363,6 +386,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'configureProxies:server',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
