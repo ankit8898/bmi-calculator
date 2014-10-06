@@ -10,8 +10,8 @@
  */
 angular
   .module('bmiCalculatorApp', [
-    'ngResource',
-    'ui.router'
+    'ui.router',
+    'restangular'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/login");
