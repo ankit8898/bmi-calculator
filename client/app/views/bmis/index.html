@@ -23,4 +23,16 @@
   <h1>BMI - {{}}</h1>
   <p>...</p>
   <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+  <table class="table table-striped">
+   <tr>
+   	<th>Height</th>
+   	<th>Weight</th>
+   	<th>BMI Calculated</th>
+   </tr>
+   <tr ng-repeat="bmi in bmis">
+   	  <td>{{bmi.height}}</td>
+   	  <td>{{bmi.weight}}</td>
+   	  <td>{{bmi.calculated_bmi}}</td>
+   </tr>
+</table>
 </div>

@@ -12,9 +12,19 @@ angular.module('bmiCalculatorApp')
     $scope.bmi = {};
 
     $scope.bmis = [];
+
+    function loadBmis(){
+    	Bmi.all().then(function(result){
+    		$scope.bmis = result;
+    	});
+    }
     $scope.submit = function(bmi) {
-       Bmi.foo()
+       Bmi.submit(bmi).then(function(data){
+       	//$scope.bmis.push(data)
+       })
        $scope.bmis.push(bmi)
        $scope.bmi = {};
     }
+
+    loadBmis();
   });
