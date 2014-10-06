@@ -1,0 +1,26 @@
+<h4> Enter BMI details</h4>
+<form class="form-horizontal" role="form">
+	<div class="form-group">
+		<label for="inputEmail3" class="col-sm-2 control-label" >Weight</label>
+		<div class="col-sm-10">
+			<input class="form-control" placeholder="Weight" ng-model='bmi.weight'>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Height</label>
+		<div class="col-sm-10">
+			<input class="form-control" ng-model='bmi.height' placeholder="Height">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary" ng-click="submit(bmi)">Submit</button>
+		</div>
+	</div>
+</form>
+
+<div class="jumbotron">
+  <h1>BMI - {{}}</h1>
+  <p>...</p>
+  <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+</div>

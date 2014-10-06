@@ -22,7 +22,7 @@ angular
         controller: 'SessionCtrl'
       })
       .state('bmi', {
-        url:        '/bmi',
+        url:        '/bmis',
         templateUrl: 'views/bmis/index.html',
         controller: 'BmiCtrl'
       })

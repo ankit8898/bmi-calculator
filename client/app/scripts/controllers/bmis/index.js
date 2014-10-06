@@ -9,9 +9,11 @@
  */
 angular.module('bmiCalculatorApp')
   .controller('BmiCtrl', function ($scope) {
-    $scope.user = {name: null,email: null};
+    $scope.bmi = {};
 
-    $scope.submit = function(user) {
-       console.log('Doing Login for', user.email)
+    $scope.bmis = [];
+    $scope.submit = function(bmi) {
+       $scope.bmis.push(bmi)
+       $scope.bmi = {};
     }
   });
